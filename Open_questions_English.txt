@@ -1,0 +1,11 @@
+Earlier records
+Some early raw files are no longer available. Retained written reports and feedback document the completed work and reported failures.
+
+Later archives
+R38 retains a complete export archive and both final checkpoints. Storage cleanup also removed camera copies that had already been backed up.
+
+Open control problem
+Road following improved during development. Returning to the centre and then staying stable remained difficult. The final feedback comparison used one continuation per condition and produced mixed recovery results.
+
+What the replay displays
+Each case uses its own saved images and measurements. Input and DN colours use recorded vectors where they are available. Missing channels stay gray. Labels for long or stable examples name their comparison group.

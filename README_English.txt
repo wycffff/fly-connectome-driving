@@ -1,0 +1,1 @@
+Static experimental exhibit. Upload this directory as the site root. The page, scripts and selected media use relative URLs. No build tools or server-side code are required. Enable GitHub Pages on the publishing branch.

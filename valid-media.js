@@ -1,0 +1,1 @@
+window.VALID_MEDIA=[];

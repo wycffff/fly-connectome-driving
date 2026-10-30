@@ -1,0 +1,112 @@
+flowchart TD
+  n0["C10-CORE"]
+  n1["C10-DATA"]
+  n2["C10-HEAD"]
+  n3["C11-TRAIN"]
+  n4["C12"]
+  n5["C13"]
+  n6["C14-DN"]
+  n7["C14-VISUAL"]
+  n8["C15-TRAIN"]
+  n9["C15-selected-4096"]
+  n10["C16-parity-2076280"]
+  n11["C17-G1-final-15360"]
+  n12["C18-neural-final-32768"]
+  n13["C19-G0-milestone-16384"]
+  n14["C19-G1-stronger-reward"]
+  n15["C2-GRADIENT-PROOF"]
+  n16["C2-R1"]
+  n17["C2-R2"]
+  n18["C20-reset-r2-milestone-65536"]
+  n19["C21-milestone-98304"]
+  n20["C23-R3-failure-7680"]
+  n21["C23-R3-learning"]
+  n22["C23-R4-failure-9216"]
+  n23["C23-R7-final-22528"]
+  n24["C24-R10-selected-32768"]
+  n25["C24-R11-selected-16384"]
+  n26["C24-R3-failure-47936"]
+  n27["C24-R4-reset-only"]
+  n28["C24-R5-failure-32768"]
+  n29["C24-R6-final-65536"]
+  n30["C4-FIT"]
+  n31["C5-COLLECT"]
+  n32["C5-FIT"]
+  n33["C6-EVAL"]
+  n34["C6-HEAD-PROBE"]
+  n35["C7"]
+  n36["C8"]
+  n37["C9-SENSITIVITY"]
+  n38["EARLY-SOURCE"]
+  n39["G2-COLLECT"]
+  n40["G2-FIT"]
+  n41["R12"]
+  n42["R13-final016384"]
+  n43["R14-final016384"]
+  n44["R15/R16/R17/R18/R19"]
+  n45["R19-6144/12288/16384"]
+  n46["R19-final016384"]
+  n47["R20-eval"]
+  n48["R21-final016384"]
+  n49["R21-final016384/R23-final016384"]
+  n50["R23-final016384"]
+  n51["R25-eval"]
+  n52["R26/R27/R28/R30/R36/R38-fresh-both-arms"]
+  n53["R36-source"]
+  n54["R38-body-final016384"]
+  n55["R38-source"]
+  n56["R38-zeros-final016384"]
+  n39 -.->|"data"| n40
+  n38 -.->|"graph-only; dynamics replaced"| n15
+  n16 -->|"parameters+Adam"| n17
+  n30 -->|"best128 inference weights; fresh Adam"| n32
+  n32 -->|"best224 frozen core/features"| n34
+  n30 -->|"best128 frozen diagnostic branch"| n34
+  n32 -->|"core+input best224"| n33
+  n34 -->|"DN uniform head512 only"| n33
+  n33 -.->|"identical composed frozen parameters"| n35
+  n35 -.->|"identical frozen composition; horizon only"| n36
+  n36 -.->|"recorded sequences; unchanged model"| n37
+  n31 -->|"same original camera data"| n1
+  n32 -->|"best224 core warm start"| n0
+  n34 -->|"uniform DN head warm start"| n0
+  n0 -->|"core+input frozen; new external head selected480"| n2
+  n2 -->|"independent camera-only trainable-core branch; not later main-policy ancestor"| n3
+  n2 -.->|"diagnostic from C10 representation; C11 final not inherited"| n4
+  n2 -.->|"unchanged C10 frozen core; new diagnostic heads"| n5
+  n2 -->|"C10 frozen core/input; fresh external DN actor/value head"| n6
+  n2 -->|"same C10 frozen representation; separate fresh head branch"| n7
+  n6 -->|"exact DN head+full Adam; C10 core stays frozen"| n8
+  n2 -->|"same immutable frozen core/input"| n8
+  n9 -.->|"固定观测数值验证；不产生新训练子代"| n10
+  n9 -->|"完整Adam与C10/C14/C15主线继续；当前camera-only"| n11
+  n11 -->|"完整Adam继续；compact camera另起新模型"| n12
+  n12 -->|"原reward continuation；完整Adam"| n13
+  n12 -->|"独立分支；deviation.5"| n14
+  n13 -->|"完整Adam继续；新样本计数独立"| n18
+  n18 -->|"完整Adam继续；98304是本轮新增而非总fresh样本"| n19
+  n19 -->|"selected full Adam；new generated pool；R1/R2零新学习"| n21
+  n20 -->|"完整Adam继续；C23新增optimized合计16896"| n22
+  n22 -->|"完整Adam继续；R5/R6没有优化；算术backend显式迁移"| n23
+  n23 -->|"完整Adam继续；R1/R2零学习"| n26
+  n28 -->|"完整Adam；critic gradient从core边界detach"| n29
+  n29 -->|"完整Adam继续；R7/R8/R9无优化，选32768非final49152"| n24
+  n24 -->|"完整Adam；reward objective显式变化；C25是budgetstage不是C编号主policy"| n25
+  n25 -.->|"planned_weight_and_full_Adam_parent"| n41
+  n25 -->|"direct_weight_and_full_Adam_parent"| n42
+  n25 -->|"direct_weight_and_full_Adam_parent; NOT R13 final"| n43
+  n25 -.->|"same direct intended parent; engineering versions do not inherit failed child weights"| n44
+  n25 -->|"direct_weight_and_full_Adam_parent; NOT R14 or R17"| n46
+  n25 -.->|"frozen_evaluation"| n47
+  n45 -.->|"frozen_evaluation"| n47
+  n25 -->|"direct_weight_and_full_Adam_parent"| n48
+  n48 -->|"direct_weight_and_full_Adam_parent"| n50
+  n49 -.->|"frozen_evaluation; no training inheritance"| n51
+  n50 -->|"same intended/restored parent; failed arm checkpoints NOT continued"| n52
+  n53 -.->|"engineering_reset_dispatch_repair; NOT learned_checkpoint_parent"| n55
+  n50 -->|"direct_weight_and_full_Adam_parent; new bodymap/Adam fresh"| n54
+  n50 -->|"direct_weight_and_full_Adam_parent; new zero map/Adam fresh"| n56
+  n26 -->|"完整Adam继续；R4无新学习"| n28
+  n26 -.->|"同一检查点用于reset诊断，无新学习"| n27
+  n8 -->|"从本轮保存检查点选择4096；未采用final8192"| n9
+  n21 -->|"本次学习中断后保存的参数和完整Adam"| n20
