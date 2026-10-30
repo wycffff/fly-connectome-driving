@@ -696,7 +696,7 @@
     {
       "type": "science",
       "title_zh": "当时授权的本机CPU小批次也留下了不完整记录",
-      "start_state": "THINKPADT14P fixedJava、same baselinegraph",
+      "start_state": "本地 CPU 主机 fixedJava、same baselinegraph",
       "purpose": "补充视觉control/左右小对象的技术seeds",
       "reason_recorded": "人当时明确授权Ultra5本机headless CPU screen；此权限不用于本次展示任务",
       "change": "2queues；quiet vision/left/right object；seeds20261002/03，30/60/90s",
@@ -1019,7 +1019,7 @@
       "expected_observation": "259节点逐个返回，braked drift受限；CTE源码可按rawpacket重建；局部投影不因近路段跳跃制造progress。",
       "actual_scope": "259/259nodes，38.281wall s；maxdrift0.000332；611poses/683rawpackets reanalysis",
       "result": "CTE与node原算法不同；CTE/8重建误差<2.55e-7；route42.929units；globalnearest产生约4.01/6.20arcjump；v2保留6adjacentgentleties、仍拒绝真jump",
-      "contemporary_judgment": "局部连续投影比rawnode/uncheckednearest适合reward；路线单位未标米",
+      "contemporary_judgment": "局部连续投影比rawnode/uncheckednearest适合reward；单位未标米",
       "retrospective_interpretation": "本条沿用当时记录中的判断；未补造事后原因。",
       "next_action": "短privilegedgeometricteacher pilot",
       "id": "step-038",
