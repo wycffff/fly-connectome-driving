@@ -65,3 +65,6 @@ body.presentation #home .hero{padding-top:5px;min-height:0}body.presentation #ho
  #replays .pagehead.compact .eyebrow{display:none}#replays .pagehead.compact h1{font-size:26px;line-height:1.25;margin:0 0 12px}#replays .pagehead.compact p:not(.eyebrow){font-size:14px;line-height:1.6;margin:0}#replays .pagehead.compact{margin:0 0 18px}
  .stage-select{margin-bottom:10px}.replay-pick{gap:8px}.replay-pick select{margin-top:3px;padding:7px 9px}.case-meta{font-size:11px;line-height:1.5;margin:10px 0}
 }
+
+/* Plain summaries lead; the complete account remains available for every attempt. */
+.attempt-details{margin-top:22px;padding:16px 20px;border:1px solid #cbd9cf;background:#f0f3eb}.attempt-details>summary,.lineage-details>summary{cursor:pointer;font-size:15px;font-weight:600;color:#2c6665}.attempt-details>div{margin-top:14px;font-size:16px;line-height:1.85}.lineage-details{margin:24px 0;padding:18px;border:1px solid #cbd9cf}.count-note{font-size:13px;line-height:1.6;color:#5a716d;margin:18px 0 4px}@media(max-width:850px){.attempt-details{padding:13px}.attempt-details>div{font-size:15px}.lineage-details{padding:12px}}
